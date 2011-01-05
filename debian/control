@@ -1,0 +1,47 @@
+Source: gtksheet
+Section: libs
+Priority: optional
+Maintainer: Luke Faraone <luke@faraone.cc>
+Build-Depends: cdbs, debhelper (>= 7), libgtk2.0-dev, gtk-doc-tools, git-core
+Standards-Version: 3.8.4
+DM-Upload-Allowed: yes
+Homepage: http://vhernandez.github.com/gtksheet/
+Vcs-Bzr: https://code.launchpad.net/~lfaraone/gtksheet/debian
+
+Package: libgtksheet-x11-2.0-0
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}
+Description: shared libraries for the GTK+ sheet widget
+ The gtksheet library is a fork of the GtkSheet widget included in the GTK+extra
+ library. It includes the GtkSheet widget, a widget displaying a 
+ spreadsheet-like matrix and GtkItemEntry widget, a GtkEntry derivative to 
+ display data in the GtkSheet. 
+ .
+ This package contains the shared libraries required by applications to use
+ this widget.
+
+Package: libgtksheet-x11-2.0-dev
+Section: libdevel
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}
+Description: development files for the GTK+ sheet widget
+ The gtksheet library is a fork of the GtkSheet widget included in the GTK+extra
+ library. It includes the GtkSheet widget, a widget displaying a 
+ spreadsheet-like matrix and GtkItemEntry widget, a GtkEntry derivative to 
+ display data in the GtkSheet. 
+ .
+ This package contains the header files required if you wish to develop
+ software that uses the GtkSheet widget.
+
+
+Package: libgtksheet-x11-2.0-doc
+Section: doc
+Architecture: all
+Depends: ${misc:Depends}
+Description: documentation for the GTK+ sheet widget
+ The gtksheet library is a fork of the GtkSheet widget included in the GTK+extra
+ library. It includes the GtkSheet widget, a widget displaying a
+ spreadsheet-like matrix and GtkItemEntry widget, a GtkEntry derivative to
+ display data in the GtkSheet.
+ .
+ This package contains the GtkSheet manual.

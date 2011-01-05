@@ -1,0 +1,43 @@
+#!/usr/bin/make -f
+
+include /usr/share/cdbs/1/rules/debhelper.mk
+include /usr/share/cdbs/1/class/autotools.mk
+include /usr/share/cdbs/1/rules/simple-patchsys.mk
+
+# Add here any variable or target overrides you need.
+#DEB_AUTO_UPDATE_AUTOCONF=2.6.1
+#DEB_AUTO_UPDATE_AUTOMAKE=1.11
+#DEB_AUTOMAKE_ARGS="--add-missing"
+#DEB_ACLOCAL_ARGS="-I m4"
+#DEB_LIBTOOL_ARGS="--copy --force --automake"
+#DEB_AUTO_UPDATE_LIBTOOL=pre
+
+DEB_CONFIGURE_SCRIPT := ./autogen.sh
+DEB_CONFIGURE_EXTRA_FLAGS := --enable-gtk-doc
+
+clean::
+	rm -f depcomp missing missing depcomp m4/gtk-doc.m4
+
+# Rules for fetching the upstream tarball
+CURRENT_TREEISH =$(shell dpkg-parsechangelog | sed -rne 's,^Version: .*git.{9}([^-]+).*,\1,p')
+CURVER=$(shell dpkg-parsechangelog | sed -rne 's,^Version: ([^-]+).*,\1,p')
+
+SOURCE_DIR=gtksheet-$(CURVER)
+TARBALL=gtksheet_$(CURVER).orig.tar.gz
+
+
+$(SOURCE_DIR):
+	git clone git://github.com/vhernandez/gtksheet.git $(SOURCE_DIR)
+	if [ x$(CURRENT_TREEISH) = x ]; then \
+	cd $(SOURCE_DIR) && git checkout v$(CURVER); \
+	else \
+	cd $(SOURCE_DIR) && git checkout $(CURRENT_TREEISH); \
+	fi
+
+
+$(TARBALL): $(SOURCE_DIR)
+	tar czvf $(TARBALL) $(SOURCE_DIR)
+
+get-orig-source: $(TARBALL)
+	rm -rf $(SOURCE_DIR) $(SOURCE_DIR).temp
+

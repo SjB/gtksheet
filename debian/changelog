@@ -1,0 +1,5 @@
+gtksheet (0.2.1+git20100217.f73e9-1) unstable; urgency=low
+
+  * Initial release (Closes: #557808) 
+
+ -- Luke Faraone <luke@faraone.cc>  Sun, 21 Feb 2010 11:19:24 -0500
